@@ -144,13 +144,13 @@ export const catalogData: ICategory[] = [
     categoryOffers: [
     ]
   },
-  {
-    id: '5',
-    title: 'Что-то еще через 2 месяца',
-    src: './src/images/catalog/bathtub/bathtub.jpg',
-    href: '#',
-    description: 'Lorem ipsum dolor, sit amet consectetur adipisicing elit. Amet mollitia accusamus labore, ducimus vitae perspiciatis quod. Lorem ipsum dolor, sit amet consectetur adipisicing elit. Amet mollitia accusamus labore, ducimus vitae perspiciatis quod.',
-    categoryOffers: [
-    ]
-  },
+  // {
+  //   id: '5',
+  //   title: 'Что-то еще через 2 месяца',
+  //   src: './src/images/catalog/bathtub/bathtub.jpg',
+  //   href: '#',
+  //   description: 'Lorem ipsum dolor, sit amet consectetur adipisicing elit. Amet mollitia accusamus labore, ducimus vitae perspiciatis quod. Lorem ipsum dolor, sit amet consectetur adipisicing elit. Amet mollitia accusamus labore, ducimus vitae perspiciatis quod.',
+  //   categoryOffers: [
+  //   ]
+  // },
 ]

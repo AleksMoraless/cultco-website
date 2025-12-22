@@ -74,109 +74,109 @@ const hitProducts = catalogData.reduce((acc: any[], category: ICategory) => {
 }));
 
 // Установка наблюдателя за каталогом чтобы не давать его пролистнуть
-const catalogScrolling = (entries: IntersectionObserverEntry[]) => {
-  const paginationItems = catalog.getContainer().querySelectorAll('.pagination__item');
+// const catalogScrolling = (entries: IntersectionObserverEntry[]) => {
+//   const paginationItems = catalog.getContainer().querySelectorAll('.pagination__item');
 
 
-  if (catalogModel.getCatalogItems().length <= 4) {
-    catalog.getListContainer().style.overflowX = 'hidden';
-    catalog.getListContainer().style.paddingBlockEnd = '0';
-    return;
-  }
+//   if (catalogModel.getCatalogItems().length <= 4) {
+//     catalog.getListContainer().style.overflowX = 'hidden';
+//     catalog.getListContainer().style.paddingBlockEnd = '0';
+//     return;
+//   }
 
-  entries.forEach((entry: IntersectionObserverEntry) => {
-    if (entry.isIntersecting) {
-      PAGE.style.overflow = 'hidden';
-      catalog.getContainer().scrollIntoView({ block: "center", behavior: "smooth" });
+//   entries.forEach((entry: IntersectionObserverEntry) => {
+//     if (entry.isIntersecting) {
+//       PAGE.style.overflow = 'hidden';
+//       catalog.getContainer().scrollIntoView({ block: "center", behavior: "smooth" });
 
-      let isScrolling = false;
-      let lastScrollTime = 0;
-      const SCROLL_COOLDOWN = 1000;
+//       let isScrolling = false;
+//       let lastScrollTime = 0;
+//       const SCROLL_COOLDOWN = 1000;
 
-      // Универсальная функция для обновления пагинации
-      const updatePagination = (directionFwd?: boolean) => {
-        const currentScroll = catalog.getListContainer().scrollLeft;
+//       // Универсальная функция для обновления пагинации
+//       const updatePagination = (directionFwd?: boolean) => {
+//         const currentScroll = catalog.getListContainer().scrollLeft;
 
 
-        let activeNum = Math.round(currentScroll / catalog.getListContainer().clientWidth);
+//         let activeNum = Math.round(currentScroll / catalog.getListContainer().clientWidth);
 
-        // Если передан directionFwd - предсказываем следующую страницу
-        if (directionFwd !== undefined) {
-          const step = directionFwd ? 1 : -1;
-          activeNum += step;
-        }
+//         // Если передан directionFwd - предсказываем следующую страницу
+//         if (directionFwd !== undefined) {
+//           const step = directionFwd ? 1 : -1;
+//           activeNum += step;
+//         }
 
-        if (activeNum >= 0 && activeNum < paginationItems.length) {
-          paginationItems.forEach(item => item.classList.remove('pagination__item_accent'));
-          paginationItems[activeNum].classList.add('pagination__item_accent');
-        }
-      };
+//         if (activeNum >= 0 && activeNum < paginationItems.length) {
+//           paginationItems.forEach(item => item.classList.remove('pagination__item_accent'));
+//           paginationItems[activeNum].classList.add('pagination__item_accent');
+//         }
+//       };
 
-      // Инициализируем пагинацию
-      updatePagination();
+//       // Инициализируем пагинацию
+//       updatePagination();
 
-      function handleWheel(e: WheelEvent) {
-        e.preventDefault();
+//       function handleWheel(e: WheelEvent) {
+//         e.preventDefault();
 
-        const now = Date.now();
+//         const now = Date.now();
 
-        if (isScrolling || (now - lastScrollTime) < SCROLL_COOLDOWN) {
-          return;
-        }
+//         if (isScrolling || (now - lastScrollTime) < SCROLL_COOLDOWN) {
+//           return;
+//         }
 
-        isScrolling = true;
-        lastScrollTime = now;
+//         isScrolling = true;
+//         lastScrollTime = now;
 
-        const scrollDirection = e.deltaY > 0 ? 1 : -1;
-        const directionFwd = scrollDirection > 0;
-        const scrollAmount = catalog.getListContainer().clientWidth + BETWEEN_GAP;
-        const newScrollLeft = catalog.getListContainer().scrollLeft + (scrollDirection * scrollAmount);
+//         const scrollDirection = e.deltaY > 0 ? 1 : -1;
+//         const directionFwd = scrollDirection > 0;
+//         const scrollAmount = catalog.getListContainer().clientWidth + BETWEEN_GAP;
+//         const newScrollLeft = catalog.getListContainer().scrollLeft + (scrollDirection * scrollAmount);
 
-        const maxScroll = catalog.getListContainer().scrollWidth - catalog.getListContainer().clientWidth;
-        const targetScroll = Math.max(0, Math.min(newScrollLeft, maxScroll));
+//         const maxScroll = catalog.getListContainer().scrollWidth - catalog.getListContainer().clientWidth;
+//         const targetScroll = Math.max(0, Math.min(newScrollLeft, maxScroll));
 
-        // Обновляем пагинацию перед началом прокрутки (с предсказанием)
-        updatePagination(directionFwd);
+//         // Обновляем пагинацию перед началом прокрутки (с предсказанием)
+//         updatePagination(directionFwd);
 
-        catalog.getListContainer().scrollTo({
-          left: targetScroll,
-          behavior: 'smooth'
-        });
+//         catalog.getListContainer().scrollTo({
+//           left: targetScroll,
+//           behavior: 'smooth'
+//         });
 
-        const checkScrollCompletion = () => {
-          const currentScroll = catalog.getListContainer().scrollLeft;
-          const atStart = currentScroll <= 10;
-          const atEnd = currentScroll >= maxScroll - 10;
+//         const checkScrollCompletion = () => {
+//           const currentScroll = catalog.getListContainer().scrollLeft;
+//           const atStart = currentScroll <= 10;
+//           const atEnd = currentScroll >= maxScroll - 10;
 
-          if (Math.abs(currentScroll - targetScroll) < 5 || atStart || atEnd) {
-            isScrolling = false;
+//           if (Math.abs(currentScroll - targetScroll) < 5 || atStart || atEnd) {
+//             isScrolling = false;
 
-            // Точное обновление пагинации после завершения анимации (без предсказания)
-            updatePagination();
+//             // Точное обновление пагинации после завершения анимации (без предсказания)
+//             updatePagination();
 
-            if ((scrollDirection > 0 && atEnd) || (scrollDirection < 0 && atStart)) {
-              PAGE.style.overflow = '';
-              document.removeEventListener('wheel', handleWheel);
-            }
-          } else {
-            requestAnimationFrame(checkScrollCompletion);
-          }
-        };
+//             if ((scrollDirection > 0 && atEnd) || (scrollDirection < 0 && atStart)) {
+//               PAGE.style.overflow = '';
+//               document.removeEventListener('wheel', handleWheel);
+//             }
+//           } else {
+//             requestAnimationFrame(checkScrollCompletion);
+//           }
+//         };
 
-        setTimeout(() => {
-          requestAnimationFrame(checkScrollCompletion);
-        }, 100);
-      }
+//         setTimeout(() => {
+//           requestAnimationFrame(checkScrollCompletion);
+//         }, 100);
+//       }
 
-      document.addEventListener('wheel', handleWheel, { passive: false });
-    }
-  })
-}
-const observer = new IntersectionObserver(catalogScrolling, {
-  rootMargin: '0px 0px',
-  threshold: 1,
-})
-observer.observe(catalog.getContainer())
+//       document.addEventListener('wheel', handleWheel, { passive: false });
+//     }
+//   })
+// }
+// const observer = new IntersectionObserver(catalogScrolling, {
+//   rootMargin: '0px 0px',
+//   threshold: 1,
+// })
+// observer.observe(catalog.getContainer())
 
 // Подписка на события 
 events.on(eventsList['catalogItems:changed'], () => {
