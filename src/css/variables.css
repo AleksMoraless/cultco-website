@@ -1,0 +1,31 @@
+/*
+  Переменные для вашего проекта
+  и их переопределение под различные устройства
+*/
+:root {
+  --header-height: 80px;
+
+  --accent-color: #FBB201;
+  --accent-color_hover: #9e6e00;
+  --heading-color: #ffffff;
+  --font: 'IBM Plex mono';
+  --font-headline: "Oswald";
+  --font-text: "Comfortaa";
+  /* --font-size: clamp(1rem, 1.0358rem + -0.1509vw, 0.3rem); */
+  --font-size: 1rem;
+  --font-weight: 100;
+  --text-color: #c5c5c5;
+  --line-height: 1.3;
+  --bground-color: #1e1e1e;
+  --bground-color-box-1lvl: #2d2d2d;
+  --bground-color-box-2lvl: #3F3F3F;
+  --bground-color-scroll-track: #5d5d5d;
+  --bground-color-lines: #5d5d5d;
+  --main-padding: clamp(0.9375rem, 0.5893rem + 1.4286vw, 1.875rem);
+  --main-gap: clamp(0.9375rem, 0.5893rem + 1.4286vw, 1.875rem);
+  --between-gap: 15px;
+  /* --between-gap: clamp(0.46875rem, 0.2946rem + 0.7143vw, 0.9375rem); */
+  --border-radius-box-1lvl: 20px;
+  --border-radius-box-2lvl: 15px;
+  --blocked-button: #5d5d5d;
+}
