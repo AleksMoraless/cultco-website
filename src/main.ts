@@ -21,7 +21,7 @@ import { headerAnchorScrolling } from './scripts/headerAnchorScrolling.ts';
 import { mapReplacer } from './scripts/mapReplacer.ts';
 
 const PAGE = document.body;
-const BETWEEN_GAP = parseInt(window.getComputedStyle(PAGE).getPropertyValue('--between-gap'));
+// const BETWEEN_GAP = parseInt(window.getComputedStyle(PAGE).getPropertyValue('--between-gap'));
 // const BASE_URL = 'http://localhost:5173/';
 
 // Шаблоны для рендера в моделях представления
