@@ -10,7 +10,7 @@ export default defineConfig({
   
   // Опции сборки
   build: {
-    outDir: 'dist',          // Папка для сборки
+    outDir: 'docs',          // Папка для сборки
     emptyOutDir: true,       // Очищать папку перед сборкой
     sourcemap: false         // Отключить sourcemaps для продакшена
   },
