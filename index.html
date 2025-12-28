@@ -3,7 +3,7 @@
 
 <head>
 	<meta charset="utf-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 	<meta name="theme-color" content="#000000" />
 	<!-- <link rel="icon" href="../public/favicon.ico" /> -->
 	<!-- <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"> -->
@@ -249,7 +249,7 @@
 		<div class="modal__container">
 			<div class="modal__info">
 				<h2 class="modal__heading heading-style heading-style_h3"></h2>
-				<button tabindex="1" class="modal__close" aria-label="закрыть">
+				<button class="modal__close" aria-label="закрыть">
 					<svg class="modal__close_svg" xmlns="http://www.w3.org/2000/svg" width="800" height="800" viewBox="0 0 32 32">
 						<path fill="#c5c5c5"
 							d="m18.8 16 5.5-5.5c.8-.8.8-2 0-2.8-.3-.4-.8-.7-1.3-.7s-1 .2-1.4.6L16 13.2l-5.5-5.5c-.8-.8-2.1-.8-2.8 0-.4.3-.7.8-.7 1.4s.2 1 .6 1.4l5.5 5.5-5.5 5.5c-.3.4-.6.9-.6 1.5 0 .5.2 1 .6 1.4.4.4.9.6 1.4.6.5 0 1-.2 1.4-.6l5.5-5.5 5.5 5.5c.8.8 2.1.8 2.8 0 .8-.8.8-2.1 0-2.8L18.8 16z" />
@@ -306,15 +306,15 @@
 		<div class="form-content">
 			<form class="form-link" action="" name="link">
 				<label class="visually-hidden" for="name">Имя</label>
-				<input tabindex="1" class="form-input input_name" name="name" type="text" placeholder="Имя" required
+				<input class="form-input input_name" name="name" type="text" placeholder="Имя" required
 					minlength="3" maxlength="30" autocomplete="off">
 
 				<label class="visually-hidden" for="phone">Номер телефона</label>
-				<input tabindex="2" class="form-input input-phone" name="phone" type="tel" placeholder="Телефон" required
+				<input class="form-input input-phone" name="phone" type="tel" placeholder="Телефон" required
 					autocomplete="off">
 
 				<label class="visually-hidden" for="email">Электронная почта</label>
-				<input tabindex="3" class="form-input input_email" name="email" type="email" placeholder="Email" required
+				<input class="form-input input_email" name="email" type="email" placeholder="Email" required
 					autocomplete="off">
 
 				<div class="file-container" for="files">
@@ -328,7 +328,7 @@
 						type="file" 
 						multiple 
 						accept=".docx, .doc, .pdf"
-						tabindex="4">
+					>
 						<span class="input-file_button">
 							<svg class="input-file_svg" xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 256 256">
 								<path class="input-file_svg__path" fill="#c5c5c5" stroke-miterlimit="10"
@@ -341,10 +341,10 @@
 				</div>
 
 				<label class="visually-hidden" for="message"></label>
-				<textarea maxlength="100" tabindex="5" class="form-input form-area scroll-style_mini" name="message"
+				<textarea maxlength="100" class="form-input form-area scroll-style_mini" name="message"
 					placeholder="Введите текст..."></textarea>
 
-				<button class="form-submit__button button-style" type="submit" tabindex="6">Оставить заявку</button>
+				<button class="form-submit__button button-style" type="submit">Оставить заявку</button>
 			</form>
 			<div class="form-text">
 				<h3 class="heading-style form-text__heading">Нужна консультация или помощь в выборе?</h3>

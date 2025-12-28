@@ -210,6 +210,7 @@ events.on(eventsList['catalogItem:picked'], ({ id }: { id: string }) => {
       isOpen: true,
       textTitle: pickedItem.title
     })
+    
   }
 })
 events.on(eventsList['modal:close'], () => {
