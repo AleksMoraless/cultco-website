@@ -1,68 +1,53 @@
 import { ICategory } from "../types/index"
 
+const images = {
+  placeholder: new URL('../images/ph.jpg', import.meta.url).href,
+};
+
+console.log(images.placeholder);
+
 export const catalogData: ICategory[] = [
   {
     id: '1',
     title: 'Строительные решения',
-    src: './src/images/catalog/constructions/construction.jpg',
+    src: images.placeholder,
     href: '#',
     description: 'Lorem ipsum dolor, sit amet consectetur adipisicing elit. Amet mollitia accusamus labore, ducimus vitae perspiciatis quod. Lorem ipsum dolor, sit amet consectetur adipisicing elit. Amet mollitia accusamus labore, ducimus vitae perspiciatis quod.',
     categoryOffers: [
       {
         id: '1',
         title: 'Корзины для кондиционеров',
-        src: './src/images/catalog/constructions/offers/baskets.png',
+        src: images.placeholder,
         description: 'Lorem ipsum dolor, sit amet consectetur adipisicing elit. Amet mollitia accusamus labore, ducimus vitae perspiciatis quod. Lorem ipsum dolor, sit amet consectetur adipisicing elit. Amet mollitia accusamus labore, ducimus vitae perspiciatis quod.',
         href: '',
         items: [
           {
             id: '1',
             title: 'Корзина Alice Judge',
-            src: './src/images/topproducts/3.jpg',
+            src: images.placeholder,
             description: 'Lorem ipsum dolor, sit amet consectetur adipisicing elit.',
             hit: true,
           },
           {
             id: '2',
             title: 'Корзина Adriana',
-            src: './src/images/topproducts/36.jpg',
+            src: images.placeholder,
             description: 'Lorem ipsum dolor, sit amet consectetur adipisicing elit. Amet mollitia accusamus labore, ducimus vitae perspiciatis quod. ',
             hit: true,
           },
           {
-            id: '1',
+            id: '3',
             title: 'Корзина Alice Judge',
-            src: './src/images/topproducts/3.jpg',
+            src: images.placeholder,
             description: 'Lorem ipsum dolor, sit amet consectetur adipisicing elit.',
-            hit: true,
+            hit: false,
           },
-          {
-            id: '2',
-            title: 'Корзина Adriana',
-            src: './src/images/topproducts/36.jpg',
-            description: 'Lorem ipsum dolor, sit amet consectetur adipisicing elit. Amet mollitia accusamus labore, ducimus vitae perspiciatis quod. ',
-            hit: true,
-          },
-          {
-            id: '1',
-            title: 'Корзина Alice Judge',
-            src: './src/images/topproducts/3.jpg',
-            description: 'Lorem ipsum dolor, sit amet consectetur adipisicing elit.',
-            hit: true,
-          },
-          {
-            id: '2',
-            title: 'Корзина Adriana',
-            src: './src/images/topproducts/36.jpg',
-            description: 'Lorem ipsum dolor, sit amet consectetur adipisicing elit. Amet mollitia accusamus labore, ducimus vitae perspiciatis quod. ',
-            hit: true,
-          }
         ]
       },
       {
         id: '02',
         title: 'Кровельные люки',
-        src: './src/images/catalog/constructions/offers/lukes.png',
+        src: images.placeholder,
         description: 'Lorem ipsum dolor, sit amet consectetur adipisicing elit. Amet mollitia accusamus labore, ducimus vitae perspiciatis quod. Lorem ipsum dolor, sit amet consectetur adipisicing elit. Amet mollitia accusamus labore, ducimus vitae perspiciatis quod.',
         href: '',
         items: []
@@ -70,7 +55,7 @@ export const catalogData: ICategory[] = [
       {
         id: '03',
         title: 'Решетки шумоподавления',
-        src: './src/images/catalog/constructions/offers/noiseoff.png',
+        src: images.placeholder,
         description: '#',
         href: '',
         items: []
@@ -78,7 +63,31 @@ export const catalogData: ICategory[] = [
       {
         id: '04',
         title: 'Подставки для кондиционеров',
-        src: './src/images/catalog/constructions/offers/underbaskets.png',
+        src: images.placeholder,
+        description: '#',
+        href: '',
+        items: []
+      },
+      {
+        id: '05',
+        title: 'Поожарные шкафы',
+        src: images.placeholder,
+        description: '#',
+        href: '',
+        items: []
+      },
+      {
+        id: '06',
+        title: 'Вентиляционные люки',
+        src: images.placeholder,
+        description: '#',
+        href: '',
+        items: []
+      },
+      {
+        id: '07',
+        title: 'Вентиляционные решетки',
+        src: images.placeholder,
         description: '#',
         href: '',
         items: []
@@ -88,21 +97,21 @@ export const catalogData: ICategory[] = [
   {
     id: '2',
     title: 'Сервисное оборудование',
-    src: './src/images/catalog/service/garage.jpg.webp',
+    src: images.placeholder,
     href: '#',
     description: 'Lorem ipsum dolor, sit amet consectetur adipisicing elit. Amet mollitia accusamus labore, ducimus vitae perspiciatis quod. Lorem ipsum dolor, sit amet consectetur adipisicing elit. Amet mollitia accusamus labore, ducimus vitae perspiciatis quod.',
     categoryOffers: [
       {
         id: '1',
         title: 'Станки',
-        src: './src/images/catalog/constructions/offers/baskets.png',
+        src: images.placeholder,
         description: 'Lorem ipsum dolor, sit amet consectetur adipisicing elit. Amet mollitia accusamus labore, ducimus vitae perspiciatis quod. Lorem ipsum dolor, sit amet consectetur adipisicing elit. Amet mollitia accusamus labore, ducimus vitae perspiciatis quod.',
         href: '',
         items: [
           {
             id: '1',
             title: 'Станок Khristen hancher',
-            src: './src/images/topproducts/4.jpg',
+            src: images.placeholder,
             description: 'Lorem ipsum dolor, sit amet consectetur adipisicing elit. Amet mollitia accusamus labore, ducimus vitae perspiciatis quod. Lorem ipsum dolor, sit amet consectetur adipisicing elit. Amet mollitia accusamus labore, ducimus vitae perspiciatis quod.',
             hit: true,
           }
@@ -111,14 +120,14 @@ export const catalogData: ICategory[] = [
       {
         id: '02',
         title: 'Инструменты',
-        src: './src/images/catalog/constructions/offers/lukes.png',
+        src: images.placeholder,
         description: 'Lorem ipsum dolor, sit amet consectetur adipisicing elit. Amet mollitia accusamus labore, ducimus vitae perspiciatis quod. Lorem ipsum dolor, sit amet consectetur adipisicing elit. Amet mollitia accusamus labore, ducimus vitae perspiciatis quod.',
         href: '',
         items: [
           {
             id: '1',
-            title: 'Threesome',
-            src: './src/images/topproducts/36.jpg',
+            title: 'Набор инструментов "Гамора"',
+            src: images.placeholder,
             description: 'Lorem ipsum dolor, sit amet consectetur adipisicing elit. Amet mollitia accusamus labore, ducimus vitae perspiciatis quod. Lorem ipsum dolor, sit amet consectetur adipisicing elit. Amet mollitia accusamus labore, ducimus vitae perspiciatis quod.',
             hit: true,
           }
@@ -129,7 +138,7 @@ export const catalogData: ICategory[] = [
   {
     id: '3',
     title: 'Мангальные зоны',
-    src: './src/images/catalog/brazier/barbeque.jpg',
+    src: images.placeholder,
     href: '#',
     description: 'Lorem ipsum dolor, sit amet consectetur adipisicing elit. Amet mollitia accusamus labore, ducimus vitae perspiciatis quod. Lorem ipsum dolor, sit amet consectetur adipisicing elit. Amet mollitia accusamus labore, ducimus vitae perspiciatis quod.',
     categoryOffers: [
@@ -138,7 +147,7 @@ export const catalogData: ICategory[] = [
   {
     id: '4',
     title: 'Банные чаны',
-    src: './src/images/catalog/bathtub/bathtub.jpg',
+    src: images.placeholder,
     href: '#',
     description: 'Lorem ipsum dolor, sit amet consectetur adipisicing elit. Amet mollitia accusamus labore, ducimus vitae perspiciatis quod. Lorem ipsum dolor, sit amet consectetur adipisicing elit. Amet mollitia accusamus labore, ducimus vitae perspiciatis quod.',
     categoryOffers: [

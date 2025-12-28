@@ -15,6 +15,8 @@ export class LinkFormView extends Component<object> {
   private isNameValid: boolean = false;
   private isPhoneValid: boolean = false;
   private isEmailValid: boolean = false;
+  private selectedFiles: File[] = []; // Хранилище выбранных файлов
+  // private fileInput: HTMLInputElement; // Ссылка на input элемент
 
   constructor(container: HTMLElement, protected events: EventEmitter) {
     super(container);
@@ -27,11 +29,15 @@ export class LinkFormView extends Component<object> {
     this.textarea = ensureElement('.form-area', this.container);
     this._submitButton = ensureElement('button[type="submit"]', this.container) as HTMLButtonElement;
 
+    // Получаем ссылку на input элемент
+    // this.fileInput = this.file as HTMLInputElement;
+
     this.form.addEventListener('submit', (e) => {
       e.preventDefault();
       this.events.emit(`${this.container.getAttribute('name')}:submit`);
       this.resetForm();
     });
+
 
     // Валидация для поля name
     this.name.addEventListener('input', () => {
@@ -62,34 +68,86 @@ export class LinkFormView extends Component<object> {
     });
 
     this.file.addEventListener('change', (e: Event) => {
+      const target = e.target as HTMLInputElement;
+      const newFiles = Array.from(target.files || []);
+
+      // Если пользователь отменил выбор (пустой файл), не делаем ничего
+      if (newFiles.length === 0) {
+        return;
+      }
+
+      // Проверяем максимальное количество файлов
+      const totalFiles = this.selectedFiles.length + newFiles.length;
+      if (totalFiles > 6) {
+        target.value = '';
+        console.log('Максимальное количество файлов - 6');
+        return;
+      }
+
+      // Добавляем новые файлы к существующим
+      // Исключаем дубликаты по имени и размеру
+      for (const newFile of newFiles) {
+        const isDuplicate = this.selectedFiles.some(
+          existingFile => 
+            existingFile.name === newFile.name && 
+            existingFile.size === newFile.size
+        );
+        
+        if (!isDuplicate) {
+          this.selectedFiles.push(newFile);
+        }
+      }
+
+      // Обновляем отображение
+      this.updateFileDisplay();
+
+      // Сбрасываем значение input, чтобы можно было выбрать тот же файл снова
+      target.value = '';
+    });
+  }
+
+  // Метод для обновления отображения файлов
+  private updateFileDisplay(): void {
+    // Очищаем содержимое
+    this.fileTitles.innerHTML = '';
+    
+    if (this.selectedFiles.length === 0) {
       this.fileTitles.classList.add('form-input_file-empty');
       this.fileTitles.textContent = 'Выберите файл...';
-      const target = e.target as HTMLInputElement;
-      const files = target.files;
+      return;
+    }
 
-      if (files) {
-        if (files.length === 0) {
-          this.fileTitles.classList.add('form-input_file-empty');
-          this.fileTitles.textContent = 'Выберите файл...';
-          return;
-        }
-        if (files.length > 6) {
-          target.value = '';
-          console.log(files);
-          return;
-        }
-        this.fileTitles.classList.remove('form-input_file-empty');
-        this.fileTitles.textContent = '';
+    this.fileTitles.classList.remove('form-input_file-empty');
+    
+    const fileList = document.createElement('ul');
+    fileList.classList.add('form-input_file__list');
 
-        for (let i = 0; i < files.length; i++) {
-          const span = document.createElement('span');
-          span.classList.add('form__file-item');
-          span.textContent = `${i + 1}.${files[i].name} (${convertBytes(files[i].size)})`;
-          this.fileTitles.append(span);
-        }
-        console.log(files);
-      }
+    this.selectedFiles.forEach((file, index) => {
+      const li = document.createElement('li');
+      li.classList.add('form__file-item');
+
+      // Кнопка удаления
+      const removeBtn = document.createElement('button');
+      removeBtn.classList.add('form__file-remove');
+      removeBtn.type = 'button';
+      removeBtn.addEventListener('click', () => this.removeFile(index));
+
+      // Информация о файле
+      const span = document.createElement('span');
+      span.textContent = `${file.name} (${convertBytes(file.size)})`;
+      
+      li.append(removeBtn);
+      li.append(span);
+      fileList.append(li);
     });
+
+    this.fileTitles.append(fileList);
+  }
+
+  // Метод для удаления файла по индексу
+  private removeFile(index: number): void {
+    this.selectedFiles.splice(index, 1);
+    this.updateFileDisplay();
   }
 
 
@@ -142,24 +200,48 @@ export class LinkFormView extends Component<object> {
     return this.isEmailValid;
   }
 
-  getFormData(): { name: string; phone: string; email: string } {
+  getFormData(): { name: string; phone: string; email: string; files: File[] } {
     return {
       name: this.name.value.trim(),
       phone: this.phone.value,
-      email: this.email.value.trim()
+      email: this.email.value.trim(),
+      files: this.selectedFiles // Добавляем файлы в возвращаемые данные
     };
   }
 
   resetForm(): void {
     this.form.reset();
-    this.fileTitles.classList.add('form-input_file-empty');
-    this.fileTitles.textContent = 'Выберите файл...';
+    this.selectedFiles = []; // Очищаем файлы при сбросе формы
+    this.updateFileDisplay(); // Обновляем отображение
     this.isNameValid = false;
     this.isPhoneValid = false;
     this.isEmailValid = false;
 
     this.name.classList.remove('error');
     this.phone.classList.remove('error');
-    this.email.classList.remove('error')
+    this.email.classList.remove('error');
+  }
+
+  // Метод для получения текущих файлов (если нужен извне)
+  getSelectedFiles(): File[] {
+    return [...this.selectedFiles];
+  }
+
+  // Метод для добавления файлов программно
+  addFiles(files: File[]): void {
+    for (const file of files) {
+      if (this.selectedFiles.length < 6) {
+        const isDuplicate = this.selectedFiles.some(
+          existingFile => 
+            existingFile.name === file.name && 
+            existingFile.size === file.size
+        );
+        
+        if (!isDuplicate) {
+          this.selectedFiles.push(file);
+        }
+      }
+    }
+    this.updateFileDisplay();
   }
 }

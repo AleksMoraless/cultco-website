@@ -31,6 +31,7 @@ export function loadPopularItems(data: IPopularItem[], events: EventEmitter): vo
 
     const button = document.createElement('button');
     button.classList.add('top-products-item_button');
+    button.classList.add('button-style');
     button.setAttribute('name', 'link-form')
     button.innerHTML = 'Узнать подробнее';
     

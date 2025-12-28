@@ -17,7 +17,7 @@ import { fulfillViewer } from './scripts/fulfilViewer.ts';
 import { CategoryOffersFormView } from './components/Views/CategoryOffersForm.ts';
 import { OfferCardView } from './components/Views/OfferCard.ts';
 import { addPaginations } from './scripts/paginationPopularItems.ts';
-import { headerAnchorScrolling } from './scripts/headerAnchorScrolling.ts';
+import { headerAnchorScrolling } from './scripts/anchorScrolling.ts';
 import { mapReplacer } from './scripts/mapReplacer.ts';
 
 const PAGE = document.body;
@@ -61,7 +61,6 @@ const burgerMenu = ensureElement('.burger-menu-overlay', PAGE);
 const burgerMenuButton = ensureElement('.header__burger-menu-btn', PAGE);
 const navigation = ensureElement('.header__navigation', PAGE);
 const contacts = ensureElement('.header__contacts', PAGE);
-const header = ensureElement('header', PAGE);
 const hitProducts = catalogData.reduce((acc: any[], category: ICategory) => {
   category.categoryOffers.forEach(offer => {
     const hitItems = offer.items.filter(item => item.hit === true);
@@ -240,7 +239,7 @@ if (navigation && contacts && burgerMenu && burgerMenuButton) {
   })
 }
 
-headerAnchorScrolling(header);
+headerAnchorScrolling(PAGE);
 // Загрузка данных каталога
 catalogModel.setCatalogItems();
 // Инициализация сексии популярных товаров

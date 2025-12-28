@@ -26,19 +26,24 @@
 </head>
 
 <body class="page">
-	<section class="head-section section-style">
-		<header class="head-section__header block-style-1">
-			<a class="header__logo" href="#" aria-label="Логотип компания 'Культ'"><img
-					src="./src/images/logo/3Ресурс 6@4x.png" alt="" aria-hidden="true"></a>
+	<header class="head-section__header block-style-1">
+			<a class="header__logo" href="" aria-label="Логотип компания 'Культ'" data-anchor="main-anchor">
+				<img 
+				src="./src/images/logo/main-logo/main-logo_small.png"
+				srcset="./src/images/logo/main-logo/main-logo_small@2x.png 2x,
+								./src/images/logo/main-logo/main-logo_small@3x.png 3x" 
+				alt="" 
+				aria-hidden="true">
+			</a>
 			<nav class="header__navigation" role="menu" aria-label="Блок ссылок навигации по сайту">
 				<ul class="header__navigation-list">
-					<li class="navigation-list__item text-link"><a class="navigation-list__item-link" href=""
+					<li class="navigation-list__item"><a class="navigation-list__item-link text-link" href=""
 							data-anchor="main-anchor">Главная</a></li>
-					<li class="navigation-list__item text-link"><a class="navigation-list__item-link" href=""
+					<li class="navigation-list__item"><a class="navigation-list__item-link text-link" href=""
 							data-anchor="about-anchor">О нас</a></li>
-					<li class="navigation-list__item text-link"><a class="navigation-list__item-link" href=""
+					<li class="navigation-list__item"><a class="navigation-list__item-link text-link" href=""
 							data-anchor="catalog-anchor">Каталог</a></li>
-					<li class="navigation-list__item text-link"><a class="navigation-list__item-link" href=""
+					<li class="navigation-list__item"><a class="navigation-list__item-link text-link" href=""
 							data-anchor="contacts-anchor">Контакты</a></li>
 				</ul>
 			</nav>
@@ -84,9 +89,17 @@
 			</button>
 
 		</header>
+	<section id="main-anchor" class="head-section section-style">
 		<div class="head-section__presenter block-style-1">
 			<div class="presenter-content">
-				<img class="presenter__logo" src="./src/images/logo/3Ресурс 6@4x.png" alt="">
+				<img 
+					class="presenter__logo" 
+					src="./src/images/logo/main-logo/main-logo@2x.png" 
+					srcset="./src/images/logo/main-logo/main-logo@3x.png 2x,
+									./src/images/logo/main-logo/main-logo@3x.png 3x" 
+
+
+					alt="">
 				<h1 class="presenter__heading heading-style heading-style_h1">Изделия из металла</h1>
 				<p class="presenter__text">Эстетика и функциональность в каждой детали </p>
 				<button class="presenter__contact-button button-style" name="link-form">Связаться с нами</button>
@@ -151,7 +164,7 @@
 			<h2 class="top-products__heading heading-style heading-style_h2">Популярные товары</h2>
 			<div class="top-products__container">
 				<div class="top-products__viewer">
-					<img class="viewer__image" src="" alt="">
+					<img class="viewer__image" src="" alt="" loading="lazy">
 					<span class="viewer__index"></span>
 					<h3 class="heading-style_h3 viewer__title"></h3>
 					<div class="viewer__text-content">
@@ -215,7 +228,7 @@
 					ОТВЕТСТВЕННОСТЬЮ «КУЛЬТ»</p>
 				<p class="requisites__ur-address"><span class="accent-color">Юридический адрес:</span>
 					390027, Рязанская обл., г. Рязань, ул. Быстрецкая, д. 10, корп. 1, кв. 256</p>
-				<p class="requisites__f-address"><span class="accent-color">Фактический адрес:</span> 390047,
+				<p class="requisites__f-address"><span class="accent-color">Фактический адрес:</span>
 					390027, Рязанская обл., г. Рязань, ул. Быстрецкая, д. 10, корп. 1, кв. 256</p>
 				<p class="requisites__inn"><span class="accent-color">ИНН:</span> 6200016496</p>
 				<p class="requisites__kpp"><span class="accent-color">КПП:</span> 620001001</p>
@@ -250,8 +263,13 @@
 
 	<footer class="footer section-style block-style-1">
 		<p class="footer__copyright">Ⓒ Copyright 2025</p>
-		<a class="footer__logo" href="">
-			<img src="./src/images/logo/3Ресурс 6@4x.png" alt="">
+		<a class="footer__logo" href="" data-anchor="main-anchor">
+			<img src="./src/images/logo/main-logo/main-logo_small.png"
+				srcset="./src/images/logo/main-logo/main-logo_small@2x.png 2x,
+								./src/images/logo/main-logo/main-logo_small@3x.png 3x" 
+				alt="" 
+				aria-hidden="true" 
+				loading="lazy">
 		</a>
 		<p class="footer__polytics">
 			<a class="text-link" href="">Политика конфиденциальности</a>
@@ -261,7 +279,7 @@
 	<template id="catalog-item">
 		<li class="catalog-item">
 			<a class="catalog-item__link" href="">
-				<img class="catalog-item__image" src="./src/images/catalog/bathtub.jpg" alt="">
+				<img class="catalog-item__image" src="./src/images/catalog/bathtub.jpg" alt="" loading="lazy">
 				<span class="catalog-item__index"></span>
 				<h3 class="catalog-item__heading heading-style heading-style_h3"></h3>
 			</a>
@@ -279,7 +297,7 @@
 		<li class="catalog-info__item">
 			<a class="catalog-info__link" href="">
 				<h4 class="catalog-info__heading heading-style heading-style_h4"></h4>
-				<img class="catalog-info__image" src="./src/images/catalog/bathtub.jpg" alt="">
+				<img class="catalog-info__image" src="./src/images/catalog/bathtub.jpg" alt="" loading="lazy">
 			</a>
 		</li>
 	</template>
@@ -299,21 +317,31 @@
 				<input tabindex="3" class="form-input input_email" name="email" type="email" placeholder="Email" required
 					autocomplete="off">
 
-				<label class="file-container" for="files">
-					<input class="visually-hidden input-file_button-real" id="files" type="file" multiple tabindex="4">
-					<span class="form-input form-input_file form-input_file-empty">Выберите файл...</span>
-					<span class="input-file_button">
-						<svg class="input-file_svg" xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 256 256">
-							<path class="input-file_svg__path" fill="#c5c5c5" stroke-miterlimit="10"
-								d="M25 11a9 9 0 0 0-9 9v32a9 9 0 0 0 9 9h22a9 9 0 0 0 9-9V31H42a6 6 0 0 1-6-6V11zm15 .344V25a2 2 0 0 0 2 2h13.656z"
-								font-family="none" font-size="none" font-weight="none" style="mix-blend-mode:normal" text-anchor="none"
-								transform="scale(3.55556)" />
-						</svg>
-					</span>
-				</label>
+				<div class="file-container" for="files">
+
+					<div class="form-input form-input_file form-input_file-empty">
+						<span>Выберите файл...</span>
+					</div>
+					<label class="" for="files">
+					<input class="visually-hidden input-file_button-real" 
+						id="files" 
+						type="file" 
+						multiple 
+						accept=".docx, .doc, .pdf"
+						tabindex="4">
+						<span class="input-file_button">
+							<svg class="input-file_svg" xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 256 256">
+								<path class="input-file_svg__path" fill="#c5c5c5" stroke-miterlimit="10"
+									d="M25 11a9 9 0 0 0-9 9v32a9 9 0 0 0 9 9h22a9 9 0 0 0 9-9V31H42a6 6 0 0 1-6-6V11zm15 .344V25a2 2 0 0 0 2 2h13.656z"
+									font-family="none" font-size="none" font-weight="none" style="mix-blend-mode:normal" text-anchor="none"
+									transform="scale(3.55556)" />
+							</svg>
+						</span>
+					</label>
+				</div>
 
 				<label class="visually-hidden" for="message"></label>
-				<textarea maxlength="100" tabindex="5" class="form-input form-area .scroll-style" name="message"
+				<textarea maxlength="100" tabindex="5" class="form-input form-area scroll-style_mini" name="message"
 					placeholder="Введите текст..."></textarea>
 
 				<button class="form-submit__button button-style" type="submit" tabindex="6">Оставить заявку</button>
@@ -331,8 +359,8 @@
 
 	<template id="certificate-item">
 		<li class="certificates-item">
-			<a class="certificates-link" href="#">
-				<img src="./src/images/certificate/16174d3cd4b1ce20fadda669478c58a9.jpg" alt="">
+			<a class="certificates-link" href="">
+				<img src="./src/images/certificate/16174d3cd4b1ce20fadda669478c58a9.jpg" alt="" loading="lazy">
 			</a>
 		</li>
 	</template>
