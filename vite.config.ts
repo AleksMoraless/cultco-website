@@ -1,4 +1,5 @@
 import { defineConfig } from 'vite'
+import autoprefixer from 'autoprefixer'
 
 export default defineConfig({
   // Настройка base для GitHub Pages (ОБЯЗАТЕЛЬНО!)
@@ -14,5 +15,18 @@ export default defineConfig({
     emptyOutDir: true,       // Очищать папку перед сборкой
     sourcemap: false         // Отключить sourcemaps для продакшена
   },
-  
+  css: {
+    postcss: {
+      plugins: [
+        autoprefixer({
+          // Настройки autoprefixer
+          overrideBrowserslist: [
+            '> 1%',
+            'last 2 versions',
+            'not dead'
+          ]
+        })
+      ]
+    }
+  }
 })
