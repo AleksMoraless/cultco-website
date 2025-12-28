@@ -335,6 +335,7 @@
   display: grid;
   grid-template-columns: min-content 1fr;
   gap: 10px;
+  align-items: center;
 }
 
 .form__file-item span {
@@ -355,10 +356,21 @@
   align-items: center;
   background-color: var(--bground-color-box-1lvl);
   border-radius: var(--border-radius-box-2lvl);
+  transition: 0.3s;
+}
+
+.input-file_button:hover {
+  background-color: var(--accent-color_hover);
+  box-shadow: inset 0 0 5px -1px #000;
 }
 
 .input-file_button:active {
-  outline: 1px solid var(--accent-color);
+  background-color: var(--accent-color_hover);
+  box-shadow: inset 0 0 5px -1px #000;
+}
+
+.input-file_button:focus-visible {
+  outline: none;
 }
 
 .input-file_button-real,
@@ -366,21 +378,12 @@
   outline: none;
 }
 
-/* .input-file_button-real:focus-visible~.form-input_file {
-  outline: 1px solid var(--accent-color);
-} */
-
 .input-file_button-real:focus-visible~.input-file_button {
   outline: 1px solid var(--accent-color);
+  background-color: var(--accent-color_hover);
+  box-shadow: inset 0 0 5px -1px #000;
 }
 
-/* .file-container:has(.input-file_button:active) .form-input_file {
-  outline: 1px solid var(--accent-color);
-} */
-
-/* .form-input_file:active~.input-file_button {
-  outline: 1px solid var(--accent-color);
-} */
 
 .form-input_file-empty {
   color: #666;
@@ -394,11 +397,7 @@
 }
 
 .input-file_svg__path {
-  transition: 0.3s;
-}
-
-.input-file_button:hover .input-file_svg__path {
-  fill: var(--accent-color);
+  /* transition: 0.3s; */
 }
 
 .form-text {
@@ -416,8 +415,7 @@
   transition: 0.3s;
 }
 
-.form-input,
-.input-file_button {
+.form-input {
   transition: outline 0.3s;
 }
 
@@ -1702,6 +1700,22 @@ p.requisites__okpo {
 }
 
 @media (hover: none) and (pointer: coarse) {
+  .full-screen {
+    height: calc(100svh - 2 * var(--main-padding));
+  }
+
+  .head-section {
+    min-block-size: calc(100svh - 3 * var(--main-padding) - 60px);
+  }
+
+  .burger-menu_active.burger-menu-overlay {
+    block-size: calc(100svh - 2 * var(--main-gap) - 50% + 20px);
+  }
+
+  .contacts {
+    height: calc(100svh - 2 * var(--main-padding));
+  }
+
   .text-link:hover {
     color: currentColor;
   }
@@ -1727,6 +1741,19 @@ p.requisites__okpo {
   }
   .modal__close:focus-visible .modal__close_svg path {
     fill: var(--accent-color);
+  }
+
+  .input-file_button:hover {
+  background-color: var(--bground-color-box-1lvl);
+  box-shadow: none;
+}
+.input-file_button:focus-visible {
+  outline: none;
+}
+
+  .input-file_button:active {
+    background-color: var(--accent-color_hover);
+    box-shadow: inset 0 0 5px -1px #000;
   }
 
   .header__burger-menu-btn:hover {
