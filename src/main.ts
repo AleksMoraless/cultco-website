@@ -43,33 +43,33 @@ const categoryOffersForm = new CategoryOffersFormView(cloneTemplate(categoryOffe
 
 // Элементы для работы 
 // Functions
-function openModal() {
-  // Сохраняем текущую позицию скролла
-  const scrollY = window.scrollY;
+// function openModal() {
+//   // Сохраняем текущую позицию скролла
+//   const scrollY = window.scrollY;
   
-  // Блокируем скролл
-  // document.body.style.position = 'fixed';
-  document.body.style.top = `-${scrollY}px`;
-  document.body.style.width = '100%';
-  document.body.style.overflow = 'hidden';
+//   // Блокируем скролл
+//   // document.body.style.position = 'fixed';
+//   document.body.style.top = `-${scrollY}px`;
+//   document.body.style.width = '100%';
+//   document.body.style.overflow = 'hidden';
   
-  // Сохраняем позицию для восстановления
-  document.body.dataset.scrollY = String(scrollY);
-}
+//   // Сохраняем позицию для восстановления
+//   document.body.dataset.scrollY = String(scrollY);
+// }
 
-function closeModal() {
-  // Восстанавливаем скролл
-  const scrollY = document.body.dataset.scrollY;
-  document.body.style.position = '';
-  document.body.style.top = '';
-  document.body.style.width = '';
-  document.body.style.overflow = '';
+// function closeModal() {
+//   // Восстанавливаем скролл
+//   const scrollY = document.body.dataset.scrollY;
+//   document.body.style.position = '';
+//   document.body.style.top = '';
+//   document.body.style.width = '';
+//   document.body.style.overflow = '';
   
-  // Восстанавливаем позицию
-  if (scrollY) {
-    window.scrollTo(0, parseInt(scrollY));
-  }
-}
+//   // Восстанавливаем позицию
+//   if (scrollY) {
+//     window.scrollTo(0, parseInt(scrollY));
+//   }
+// }
 
 function initPopularSection() {
   if (hitProducts.length === 0) {
@@ -223,7 +223,7 @@ events.on(eventsList['linkForm:open'], ({ title }: { title: string }) => {
     isOpen: true,
     textTitle: title,
   })
-  openModal()
+  // openModal()
 })
 events.on(eventsList['catalogItem:picked'], ({ id }: { id: string }) => {
   // document.body.style.overflow = 'hidden';
@@ -241,7 +241,7 @@ events.on(eventsList['catalogItem:picked'], ({ id }: { id: string }) => {
       isOpen: true,
       textTitle: pickedItem.title
     })
-    openModal();
+    // openModal();
   }
 })
 events.on(eventsList['modal:close'], () => {
@@ -251,7 +251,7 @@ events.on(eventsList['modal:close'], () => {
     isOpen: false,
     textTitle: ''
   })
-  closeModal()
+  // closeModal()
 })
 events.on(eventsList['popularItems: picked'], ({ id }: { id: number }) => {
   if (popularItemsViewer) {

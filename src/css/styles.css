@@ -16,6 +16,13 @@
   flex-direction: column;
 }
 
+html:has(.modal.modal_active) {
+  overflow: hidden;
+}
+body:has(.modal.modal_active) {
+  overflow: hidden;
+}
+
 /* ??-----------INDIVIDUAL STYLES----------- */
 .visually-hidden {
   clip: rect(0 0 0 0);
@@ -1725,6 +1732,10 @@ p.requisites__okpo {
 
 
 @media (hover: none) and (pointer: coarse) {
+  body.modal-open {
+    -webkit-overflow-scrolling: auto !important;
+    touch-action: none;
+  }
   .full-screen {
     height: calc(100svh - 2 * var(--main-padding));
   }
