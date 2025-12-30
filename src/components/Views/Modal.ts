@@ -11,29 +11,29 @@ interface IModalData {
   contentType: string;
 }
 
-function updateMargin(container: HTMLElement) {
-  const hasVerticalScroll = container.scrollHeight > container.clientHeight;
-      console.log('updateModalMargin выполнен:', hasVerticalScroll);
-      const BETWEEN_GAP = parseInt(window.getComputedStyle(container).getPropertyValue('--between-gap'));
-      // Устанавливаем margin в зависимости от наличия скролла
-      container.style.paddingInlineEnd = hasVerticalScroll ? `${BETWEEN_GAP}px` : '0px';
-}
+// function updateMargin(container: HTMLElement) {
+//   const hasVerticalScroll = container.scrollHeight > container.clientHeight;
+//       console.log('updateModalMargin выполнен:', hasVerticalScroll);
+//       const BETWEEN_GAP = parseInt(window.getComputedStyle(container).getPropertyValue('--between-gap'));
+//       // Устанавливаем margin в зависимости от наличия скролла
+//       container.style.paddingInlineEnd = hasVerticalScroll ? `${BETWEEN_GAP}px` : '0px';
+// }
 
 
 // Функция с debounce для предотвращения частых вызовов
-function updateModalMarginDebounced(container: HTMLElement) {
-  let timeoutId: any | null = null;
+// function updateModalMarginDebounced(container: HTMLElement) {
+//   let timeoutId: any | null = null;
   
-  return () => {
-    if (timeoutId) {
-      clearTimeout(timeoutId);
-    }
+//   return () => {
+//     if (timeoutId) {
+//       clearTimeout(timeoutId);
+//     }
     
-    timeoutId = setTimeout(() => {
-      updateMargin(container);
-    }, 150); // Задержка в 150ms
-  };
-}
+//     timeoutId = setTimeout(() => {
+//       updateMargin(container);
+//     }, 150); // Задержка в 150ms
+//   };
+// }
 
 // const BETWEEN_GAP = parseInt(window.getComputedStyle(PAGE).getPropertyValue('--between-gap'));
 
@@ -44,9 +44,9 @@ export class ModalView extends Component<IModalData> {
   protected modalContainer: HTMLElement;
   protected component: string = '';
   protected focusTrap: FocusTrap;
-  protected resizeObserver: ResizeObserver;
-  protected debouncedUpdateMargin: () => void;
-  protected resizeTimeoutId: any | null = null;
+  // protected resizeObserver: ResizeObserver;
+  // protected debouncedUpdateMargin: () => void;
+  // protected resizeTimeoutId: any | null = null;
 
   constructor(container: HTMLElement, protected events: EventEmitter) {
     super(container);
@@ -56,24 +56,24 @@ export class ModalView extends Component<IModalData> {
     this.modalContainer = ensureElement('.modal__content', this.container);
 
     // Создаем debounced версию функции обновления margin
-    this.debouncedUpdateMargin = updateModalMarginDebounced(this.modalContainer);
+    // this.debouncedUpdateMargin = updateModalMarginDebounced(this.modalContainer);
 
     // Создаем ResizeObserver с debounce
-    this.resizeObserver = new ResizeObserver(() => {
-      // Отменяем предыдущий таймаут, если он есть
-      if (this.resizeTimeoutId) {
-        clearTimeout(this.resizeTimeoutId);
-      }
+    // this.resizeObserver = new ResizeObserver(() => {
+    //   // Отменяем предыдущий таймаут, если он есть
+    //   if (this.resizeTimeoutId) {
+    //     clearTimeout(this.resizeTimeoutId);
+    //   }
       
-      // Устанавливаем новый таймаут для задержки
-      this.resizeTimeoutId = setTimeout(() => {
-          // Вызываем debounced версию обновления margin
-          this.debouncedUpdateMargin();
-      }, 200); // Задержка в 200ms для ResizeObserver
-    });
+    //   // Устанавливаем новый таймаут для задержки
+    //   this.resizeTimeoutId = setTimeout(() => {
+    //       // Вызываем debounced версию обновления margin
+    //       this.debouncedUpdateMargin();
+    //   }, 200); // Задержка в 200ms для ResizeObserver
+    // });
 
     // Начинаем наблюдение
-    this.resizeObserver.observe(this.modalContainer);
+    // this.resizeObserver.observe(this.modalContainer);
 
     this.closeButton.addEventListener('click', () => {
       this.events.emit(eventsList['modal:close']);
@@ -84,6 +84,8 @@ export class ModalView extends Component<IModalData> {
       escapeDeactivates: false,
       clickOutsideDeactivates: true,
       returnFocusOnDeactivate: true,
+      //!!HEALTH THE FOCUS AUTO ACTVIATE
+      initialFocus: false, 
     });
 
     this.container.addEventListener('click', (e) => {
@@ -144,7 +146,7 @@ export class ModalView extends Component<IModalData> {
     Object.assign(this as object, data ?? {});
     
     // Вызываем обновление margin после рендеринга с задержкой
-    updateMargin(this.modalContainer);
+    // updateMargin(this.modalContainer);
     
     return this.container;
   }

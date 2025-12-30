@@ -29,6 +29,7 @@ const cardTemplate = ensureElement('#catalog-item', PAGE) as HTMLTemplateElement
 const linkFormTemplate = ensureElement('#link-form', PAGE) as HTMLTemplateElement;
 const categoryOffersFormTemplate = ensureElement('#catalog-info', PAGE) as HTMLTemplateElement;
 const offerCardTemplate = ensureElement('#catalog-info__item', PAGE) as HTMLTemplateElement;
+const topProductViewer = ensureElement('#product-viewer', PAGE) as HTMLTemplateElement;
 
 const events = new EventEmitter();
 // Модель хранения данных 
@@ -42,6 +43,34 @@ const categoryOffersForm = new CategoryOffersFormView(cloneTemplate(categoryOffe
 
 // Элементы для работы 
 // Functions
+function openModal() {
+  // Сохраняем текущую позицию скролла
+  const scrollY = window.scrollY;
+  
+  // Блокируем скролл
+  // document.body.style.position = 'fixed';
+  document.body.style.top = `-${scrollY}px`;
+  document.body.style.width = '100%';
+  document.body.style.overflow = 'hidden';
+  
+  // Сохраняем позицию для восстановления
+  document.body.dataset.scrollY = String(scrollY);
+}
+
+function closeModal() {
+  // Восстанавливаем скролл
+  const scrollY = document.body.dataset.scrollY;
+  document.body.style.position = '';
+  document.body.style.top = '';
+  document.body.style.width = '';
+  document.body.style.overflow = '';
+  
+  // Восстанавливаем позицию
+  if (scrollY) {
+    window.scrollTo(0, parseInt(scrollY));
+  }
+}
+
 function initPopularSection() {
   if (hitProducts.length === 0) {
     if (topProductSection) {
@@ -56,11 +85,12 @@ function initPopularSection() {
 }
 // Constants
 const topProductSection = ensureElement('.top-products', PAGE) as HTMLElement;
-const popularItemsViewer = ensureElement('.top-products__viewer', PAGE);
+const popularItemsViewer = cloneTemplate(topProductViewer);
 const burgerMenu = ensureElement('.burger-menu-overlay', PAGE);
 const burgerMenuButton = ensureElement('.header__burger-menu-btn', PAGE);
 const navigation = ensureElement('.header__navigation', PAGE);
 const contacts = ensureElement('.header__contacts', PAGE);
+const topProductContainer = ensureElement('.top-products__container', PAGE);
 const hitProducts = catalogData.reduce((acc: any[], category: ICategory) => {
   category.categoryOffers.forEach(offer => {
     const hitItems = offer.items.filter(item => item.hit === true);
@@ -187,15 +217,16 @@ events.on(eventsList['catalogItems:changed'], () => {
   })
 })
 events.on(eventsList['linkForm:open'], ({ title }: { title: string }) => {
-  PAGE.style.overflow = 'hidden';
+  // document.body.style.overflow = 'hidden';
   modal.modalRender('link-form', {
     content: linkForm.render(),
     isOpen: true,
     textTitle: title,
   })
+  openModal()
 })
 events.on(eventsList['catalogItem:picked'], ({ id }: { id: string }) => {
-  PAGE.style.overflow = 'hidden';
+  // document.body.style.overflow = 'hidden';
   const pickedItem = catalogModel.getCatalogCategoryById(id);
   if (pickedItem) {
     const offersHTMLArray = pickedItem.categoryOffers.map(item => {
@@ -210,16 +241,17 @@ events.on(eventsList['catalogItem:picked'], ({ id }: { id: string }) => {
       isOpen: true,
       textTitle: pickedItem.title
     })
-    
+    openModal();
   }
 })
 events.on(eventsList['modal:close'], () => {
-  PAGE.style.overflow = '';
+  // document.body.style.overflow = '';
   modal.render({
     content: null,
     isOpen: false,
     textTitle: ''
   })
+  closeModal()
 })
 events.on(eventsList['popularItems: picked'], ({ id }: { id: number }) => {
   if (popularItemsViewer) {
@@ -244,12 +276,16 @@ headerAnchorScrolling(PAGE);
 // Загрузка данных каталога
 catalogModel.setCatalogItems();
 // Инициализация сексии популярных товаров
+console.log(topProductContainer);
+console.log(popularItemsViewer);
+topProductContainer.prepend(popularItemsViewer);
 initPopularSection();
 addPaginations();
 
 const openFormButtons = ensureAllElements('button[name="link-form"]', PAGE);
 // Так как нет модели предствления главной страницы, имитируем события кнопок тут
-openFormButtons.forEach(item => item.addEventListener('click', () => {
+openFormButtons.forEach(item => item.addEventListener('click', (e) => {
+  e.preventDefault()
   events.emit(eventsList['linkForm:open'], { title: 'Свяжитесь с нами' });
 }))
 

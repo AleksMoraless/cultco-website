@@ -4,8 +4,6 @@ const images = {
   placeholder: new URL('../images/ph.jpg', import.meta.url).href,
 };
 
-console.log(images.placeholder);
-
 export const catalogData: ICategory[] = [
   {
     id: '1',
@@ -25,6 +23,7 @@ export const catalogData: ICategory[] = [
             id: '1',
             title: 'Корзина Alice Judge',
             src: images.placeholder,
+            alt: '',
             description: 'Lorem ipsum dolor, sit amet consectetur adipisicing elit.',
             hit: true,
           },
@@ -32,6 +31,7 @@ export const catalogData: ICategory[] = [
             id: '2',
             title: 'Корзина Adriana',
             src: images.placeholder,
+            alt: '',
             description: 'Lorem ipsum dolor, sit amet consectetur adipisicing elit. Amet mollitia accusamus labore, ducimus vitae perspiciatis quod. ',
             hit: true,
           },
@@ -39,6 +39,7 @@ export const catalogData: ICategory[] = [
             id: '3',
             title: 'Корзина Alice Judge',
             src: images.placeholder,
+            alt: '',
             description: 'Lorem ipsum dolor, sit amet consectetur adipisicing elit.',
             hit: false,
           },
@@ -112,6 +113,7 @@ export const catalogData: ICategory[] = [
             id: '1',
             title: 'Станок Khristen hancher',
             src: images.placeholder,
+            alt: '',
             description: 'Lorem ipsum dolor, sit amet consectetur adipisicing elit. Amet mollitia accusamus labore, ducimus vitae perspiciatis quod. Lorem ipsum dolor, sit amet consectetur adipisicing elit. Amet mollitia accusamus labore, ducimus vitae perspiciatis quod.',
             hit: true,
           }
@@ -128,6 +130,7 @@ export const catalogData: ICategory[] = [
             id: '1',
             title: 'Набор инструментов "Гамора"',
             src: images.placeholder,
+            alt: '',
             description: 'Lorem ipsum dolor, sit amet consectetur adipisicing elit. Amet mollitia accusamus labore, ducimus vitae perspiciatis quod. Lorem ipsum dolor, sit amet consectetur adipisicing elit. Amet mollitia accusamus labore, ducimus vitae perspiciatis quod.',
             hit: true,
           }

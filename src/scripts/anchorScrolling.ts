@@ -33,5 +33,4 @@ export function headerAnchorScrolling(HTMLContainer: Element | null) {
     })
 
   })
-  console.log(linkArray);
 }

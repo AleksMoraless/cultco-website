@@ -21,7 +21,6 @@ export class CategoryCardView extends Component<ICategory> {
     this.cardLink.addEventListener('click', (e) => {
       e.preventDefault();
       events.emit(eventsList['catalogItem:picked'], { id: decodeIndex(this.cardId.textContent) });
-      console.log(window.location.href);
     })
   }
 

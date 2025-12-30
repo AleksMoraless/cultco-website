@@ -5,6 +5,7 @@ export function fulfillViewer(id: number, popularItemsViewer: Element, hitProduc
     viewerIndex!.textContent = hitProductsWithIndex[id].index;
     const viewerImage = popularItemsViewer.querySelector('.viewer__image');
     viewerImage?.setAttribute('src', hitProductsWithIndex[id].src)
+    viewerImage?.setAttribute('alt', hitProductsWithIndex[id].alt)
     const viewerTitle = popularItemsViewer.querySelector('.viewer__title');
     viewerTitle!.textContent = hitProductsWithIndex[id].title;
     const viewerDescription = popularItemsViewer.querySelector('.viewer__description');

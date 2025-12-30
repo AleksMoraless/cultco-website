@@ -23,6 +23,7 @@ export interface IOfferItem {
     id: string,
     title: string,
     src: string,
+    alt: string,
     description: string,
     hit: boolean,
 }
