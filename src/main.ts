@@ -19,6 +19,7 @@ import { OfferCardView } from './components/Views/OfferCard.ts';
 import { addPaginations } from './scripts/paginationPopularItems.ts';
 import { headerAnchorScrolling } from './scripts/anchorScrolling.ts';
 import { mapReplacer } from './scripts/mapReplacer.ts';
+import { ScrollLock } from './components/base/noScroll.ts';
 
 const PAGE = document.body;
 // const BETWEEN_GAP = parseInt(window.getComputedStyle(PAGE).getPropertyValue('--between-gap'));
@@ -91,6 +92,9 @@ const burgerMenuButton = ensureElement('.header__burger-menu-btn', PAGE);
 const navigation = ensureElement('.header__navigation', PAGE);
 const contacts = ensureElement('.header__contacts', PAGE);
 const topProductContainer = ensureElement('.top-products__container', PAGE);
+// Использование
+const scrollLock = new ScrollLock();
+
 const hitProducts = catalogData.reduce((acc: any[], category: ICategory) => {
   category.categoryOffers.forEach(offer => {
     const hitItems = offer.items.filter(item => item.hit === true);
@@ -223,7 +227,7 @@ events.on(eventsList['linkForm:open'], ({ title }: { title: string }) => {
     isOpen: true,
     textTitle: title,
   })
-  // openModal()
+  scrollLock.lock();
 })
 events.on(eventsList['catalogItem:picked'], ({ id }: { id: string }) => {
   // document.body.style.overflow = 'hidden';
@@ -241,7 +245,7 @@ events.on(eventsList['catalogItem:picked'], ({ id }: { id: string }) => {
       isOpen: true,
       textTitle: pickedItem.title
     })
-    // openModal();
+    scrollLock.lock();
   }
 })
 events.on(eventsList['modal:close'], () => {
@@ -251,7 +255,7 @@ events.on(eventsList['modal:close'], () => {
     isOpen: false,
     textTitle: ''
   })
-  // closeModal()
+  scrollLock.unlock();
 })
 events.on(eventsList['popularItems: picked'], ({ id }: { id: number }) => {
   if (popularItemsViewer) {
