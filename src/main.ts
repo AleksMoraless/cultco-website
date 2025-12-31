@@ -19,7 +19,8 @@ import { OfferCardView } from './components/Views/OfferCard.ts';
 import { addPaginations } from './scripts/paginationPopularItems.ts';
 import { headerAnchorScrolling } from './scripts/anchorScrolling.ts';
 import { mapReplacer } from './scripts/mapReplacer.ts';
-import { ScrollLock } from './components/base/noScroll.ts';
+// import { ScrollLock } from './components/base/noScroll.ts';
+import { disableBodyScroll, enableBodyScroll } from 'body-scroll-lock';
 
 const PAGE = document.body;
 // const BETWEEN_GAP = parseInt(window.getComputedStyle(PAGE).getPropertyValue('--between-gap'));
@@ -42,35 +43,6 @@ const modal = new ModalView(ensureElement('#modal-container', PAGE) as HTMLEleme
 const linkForm = new LinkFormView(cloneTemplate(linkFormTemplate), events);
 const categoryOffersForm = new CategoryOffersFormView(cloneTemplate(categoryOffersFormTemplate), events);
 
-// Элементы для работы 
-// Functions
-// function openModal() {
-//   // Сохраняем текущую позицию скролла
-//   const scrollY = window.scrollY;
-  
-//   // Блокируем скролл
-//   // document.body.style.position = 'fixed';
-//   document.body.style.top = `-${scrollY}px`;
-//   document.body.style.width = '100%';
-//   document.body.style.overflow = 'hidden';
-  
-//   // Сохраняем позицию для восстановления
-//   document.body.dataset.scrollY = String(scrollY);
-// }
-
-// function closeModal() {
-//   // Восстанавливаем скролл
-//   const scrollY = document.body.dataset.scrollY;
-//   document.body.style.position = '';
-//   document.body.style.top = '';
-//   document.body.style.width = '';
-//   document.body.style.overflow = '';
-  
-//   // Восстанавливаем позицию
-//   if (scrollY) {
-//     window.scrollTo(0, parseInt(scrollY));
-//   }
-// }
 
 function initPopularSection() {
   if (hitProducts.length === 0) {
@@ -93,7 +65,7 @@ const navigation = ensureElement('.header__navigation', PAGE);
 const contacts = ensureElement('.header__contacts', PAGE);
 const topProductContainer = ensureElement('.top-products__container', PAGE);
 // Использование
-const scrollLock = new ScrollLock();
+// const scrollLock = new ScrollLock();
 
 const hitProducts = catalogData.reduce((acc: any[], category: ICategory) => {
   category.categoryOffers.forEach(offer => {
@@ -227,7 +199,8 @@ events.on(eventsList['linkForm:open'], ({ title }: { title: string }) => {
     isOpen: true,
     textTitle: title,
   })
-  scrollLock.lock();
+  // scrollLock.lock();
+  disableBodyScroll(modal.getModal());
 })
 events.on(eventsList['catalogItem:picked'], ({ id }: { id: string }) => {
   // document.body.style.overflow = 'hidden';
@@ -245,7 +218,8 @@ events.on(eventsList['catalogItem:picked'], ({ id }: { id: string }) => {
       isOpen: true,
       textTitle: pickedItem.title
     })
-    scrollLock.lock();
+    // scrollLock.lock();
+    disableBodyScroll(modal.getModal());
   }
 })
 events.on(eventsList['modal:close'], () => {
@@ -255,7 +229,9 @@ events.on(eventsList['modal:close'], () => {
     isOpen: false,
     textTitle: ''
   })
-  scrollLock.unlock();
+  // scrollLock.unlock();
+  enableBodyScroll(modal.getModal());
+
 })
 events.on(eventsList['popularItems: picked'], ({ id }: { id: number }) => {
   if (popularItemsViewer) {
@@ -280,8 +256,6 @@ headerAnchorScrolling(PAGE);
 // Загрузка данных каталога
 catalogModel.setCatalogItems();
 // Инициализация сексии популярных товаров
-console.log(topProductContainer);
-console.log(popularItemsViewer);
 topProductContainer.prepend(popularItemsViewer);
 initPopularSection();
 addPaginations();

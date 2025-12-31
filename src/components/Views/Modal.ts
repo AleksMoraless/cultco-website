@@ -95,8 +95,8 @@ export class ModalView extends Component<IModalData> {
     })
   }
 
-  getModalComponent(): string {
-    return this.component;
+  getModal(): HTMLElement {
+    return this.modal;
   }
 
   set contentType(value: string) {
