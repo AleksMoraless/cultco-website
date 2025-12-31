@@ -19,8 +19,8 @@ import { OfferCardView } from './components/Views/OfferCard.ts';
 import { addPaginations } from './scripts/paginationPopularItems.ts';
 import { headerAnchorScrolling } from './scripts/anchorScrolling.ts';
 import { mapReplacer } from './scripts/mapReplacer.ts';
-// import { ScrollLock } from './components/base/noScroll.ts';
-import { disableBodyScroll, enableBodyScroll } from 'body-scroll-lock';
+// import { disableBodyScroll, enableBodyScroll } from 'body-scroll-lock';
+import { ScrollLock } from './components/base/noScroll.ts';
 
 const PAGE = document.body;
 // const BETWEEN_GAP = parseInt(window.getComputedStyle(PAGE).getPropertyValue('--between-gap'));
@@ -65,7 +65,7 @@ const navigation = ensureElement('.header__navigation', PAGE);
 const contacts = ensureElement('.header__contacts', PAGE);
 const topProductContainer = ensureElement('.top-products__container', PAGE);
 // Использование
-// const scrollLock = new ScrollLock();
+const scrollLock = new ScrollLock();
 
 const hitProducts = catalogData.reduce((acc: any[], category: ICategory) => {
   category.categoryOffers.forEach(offer => {
@@ -199,8 +199,8 @@ events.on(eventsList['linkForm:open'], ({ title }: { title: string }) => {
     isOpen: true,
     textTitle: title,
   })
-  // scrollLock.lock();
-  disableBodyScroll(modal.getModal());
+  scrollLock.lock();
+  // disableBodyScroll(modal.getModal());
 })
 events.on(eventsList['catalogItem:picked'], ({ id }: { id: string }) => {
   // document.body.style.overflow = 'hidden';
@@ -218,8 +218,8 @@ events.on(eventsList['catalogItem:picked'], ({ id }: { id: string }) => {
       isOpen: true,
       textTitle: pickedItem.title
     })
-    // scrollLock.lock();
-    disableBodyScroll(modal.getModal());
+    scrollLock.lock();
+    // disableBodyScroll(modal.getModal());
   }
 })
 events.on(eventsList['modal:close'], () => {
@@ -229,8 +229,8 @@ events.on(eventsList['modal:close'], () => {
     isOpen: false,
     textTitle: ''
   })
-  // scrollLock.unlock();
-  enableBodyScroll(modal.getModal());
+  scrollLock.unlock();
+  // enableBodyScroll(modal.getModal());
 
 })
 events.on(eventsList['popularItems: picked'], ({ id }: { id: number }) => {
@@ -248,7 +248,13 @@ if (navigation && contacts && burgerMenu && burgerMenuButton) {
   burgerMenu.appendChild(cloneContacts);
 
   burgerMenuButton?.addEventListener('click', () => {
-    burgerMenu?.classList.toggle('burger-menu_active')
+    if (!burgerMenu.classList.contains('burger-menu_active')) {
+      burgerMenu?.classList.add('burger-menu_active')
+      scrollLock.lock();     
+    } else {
+      burgerMenu?.classList.remove('burger-menu_active')
+      scrollLock.unlock();
+    }
   })
 }
 
