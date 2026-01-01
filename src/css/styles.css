@@ -1446,9 +1446,9 @@ p.requisites__okpo {
   }
 
   .viewer__image {
-    /*!!MAYBE /
+    /*!!MAYBE */
     /* block-size: 100%; */
-    position: relative;
+    position: initial;
     border-radius: var(--border-radius-box-1lvl);
     grid-column: 1 / -1;
     grid-row: 1 / 2;
