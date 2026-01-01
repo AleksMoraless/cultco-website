@@ -1436,8 +1436,8 @@ p.requisites__okpo {
   .top-products__viewer {
     display: grid;
     gap: 0;
-    grid-template-columns: auto 1fr;
-    grid-template-rows: 55% min-content;
+    grid-template-columns: 1fr;
+    grid-template-rows: 55% min-content 1fr;
     padding: 0;
   }
 
@@ -1446,7 +1446,8 @@ p.requisites__okpo {
   }
 
   .viewer__image {
-    block-size: 100%;
+    /*!!MAYBE /
+    /* block-size: 100%; */
     position: relative;
     border-radius: var(--border-radius-box-1lvl);
     grid-column: 1 / -1;
