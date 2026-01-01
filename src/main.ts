@@ -21,6 +21,7 @@ import { headerAnchorScrolling } from './scripts/anchorScrolling.ts';
 import { mapReplacer } from './scripts/mapReplacer.ts';
 // import { disableBodyScroll, enableBodyScroll } from 'body-scroll-lock';
 import { ScrollLock } from './components/base/noScroll.ts';
+import { downloadFile } from './scripts/downloadFile.ts';
 
 const PAGE = document.body;
 // const BETWEEN_GAP = parseInt(window.getComputedStyle(PAGE).getPropertyValue('--between-gap'));
@@ -64,6 +65,7 @@ const burgerMenuButton = ensureElement('.header__burger-menu-btn', PAGE);
 const navigation = ensureElement('.header__navigation', PAGE);
 const contacts = ensureElement('.header__contacts', PAGE);
 const topProductContainer = ensureElement('.top-products__container', PAGE);
+const downloadCard = ensureElement('.requisites__button', PAGE);
 // Использование
 const scrollLock = new ScrollLock();
 
@@ -274,3 +276,5 @@ openFormButtons.forEach(item => item.addEventListener('click', (e) => {
 }))
 
 mapReplacer();
+
+downloadCard.addEventListener('click', () => downloadFile())

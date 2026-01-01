@@ -1,7 +1,7 @@
 import { ICategory } from "../types/index"
 
 const images = {
-  placeholder: new URL('../images/ph.jpg', import.meta.url).href,
+  placeholder: new URL('../images/ph.jpg', import.meta.url).href
 };
 
 export const catalogData: ICategory[] = [
