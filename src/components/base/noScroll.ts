@@ -1,14 +1,15 @@
+// noScroll.ts
 export class ScrollLock {
   private scrollPosition = 0;
   private isLocked = false;
+  private isUnlocking = false; // флаг процесса разблокировки
   
   lock() {
-    if (this.isLocked) return;
+    if (this.isLocked || this.isUnlocking) return;
     
-    // Сохраняем позицию
     this.scrollPosition = window.pageYOffset || document.documentElement.scrollTop;
     
-    // ВРЕМЕННО отключаем плавную прокрутку на всем документе
+    // ВРЕМЕННО отключаем плавную прокрутку
     document.documentElement.style.scrollBehavior = 'auto';
     
     // Блокируем скролл
@@ -19,10 +20,13 @@ export class ScrollLock {
     document.body.style.left = '0';
     
     this.isLocked = true;
+    this.isUnlocking = false;
   }
   
   unlock() {
-    if (!this.isLocked) return;
+    if (!this.isLocked || this.isUnlocking) return;
+    
+    this.isUnlocking = true;
     
     // Восстанавливаем обычное состояние
     document.body.style.overflow = '';
@@ -34,15 +38,21 @@ export class ScrollLock {
     // МГНОВЕННО скроллим к сохраненной позиции
     window.scrollTo(0, this.scrollPosition);
     
-    // Двойная гарантия
-    requestAnimationFrame(() => {
-      window.scrollTo(0, this.scrollPosition);
-      
-      // Восстанавливаем плавную прокрутку с задержкой
-      setTimeout(() => {
-        document.documentElement.style.scrollBehavior = '';
-        this.isLocked = false;
-      }, 100);
-    });
+    // Восстанавливаем плавную прокрутку
+    setTimeout(() => {
+      document.documentElement.style.scrollBehavior = '';
+      this.isLocked = false;
+      this.isUnlocking = false;
+    }, 100);
+  }
+  
+  // Метод для получения текущей сохраненной позиции
+  getSavedPosition(): number {
+    return this.scrollPosition;
+  }
+  
+  // Метод для проверки, идет ли процесс разблокировки
+  isCurrentlyUnlocking(): boolean {
+    return this.isUnlocking;
   }
 }

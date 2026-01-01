@@ -258,7 +258,7 @@ if (navigation && contacts && burgerMenu && burgerMenuButton) {
   })
 }
 
-headerAnchorScrolling(PAGE);
+headerAnchorScrolling(PAGE, scrollLock);
 // Загрузка данных каталога
 catalogModel.setCatalogItems();
 // Инициализация сексии популярных товаров
