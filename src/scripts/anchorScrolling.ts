@@ -1,7 +1,7 @@
 import { ScrollLock } from "../components/base/noScroll";
 
 export function headerAnchorScrolling(HTMLContainer: Element | null, scrollLock: ScrollLock) {
-  
+  document.addEventListener('DOMContentLoaded', (): void => {
   if (!HTMLContainer) return;
   const linkArray = HTMLContainer.querySelectorAll('a[data-anchor]');
   const header = HTMLContainer.querySelector('.head-section__header')?.clientHeight;
@@ -35,6 +35,7 @@ export function headerAnchorScrolling(HTMLContainer: Element | null, scrollLock:
       
       // Пересчитываем позицию после восстановления скролла
       const topPosition = anchorElement.getBoundingClientRect().top + window.pageYOffset - padding - header!;
+      console.log(topPosition);
       
       window.scrollTo({
         top: topPosition,
@@ -45,4 +46,5 @@ export function headerAnchorScrolling(HTMLContainer: Element | null, scrollLock:
 });
 
   })
+})
 }

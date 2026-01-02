@@ -23,7 +23,9 @@ import { mapReplacer } from './scripts/mapReplacer.ts';
 import { ScrollLock } from './components/base/noScroll.ts';
 import { downloadFile } from './scripts/downloadFile.ts';
 
-const PAGE = document.body;
+
+function initApp() {
+  const PAGE = document.body;
 // const BETWEEN_GAP = parseInt(window.getComputedStyle(PAGE).getPropertyValue('--between-gap'));
 // const BASE_URL = 'http://localhost:5173/';
 
@@ -286,5 +288,6 @@ headerAnchorScrolling(PAGE, scrollLock);
 
 // Добавление загрузки карточки события
 downloadCard.addEventListener('click', () => downloadFile())
+} 
 
-
+document.addEventListener('DOMContentLoaded', initApp);
