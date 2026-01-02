@@ -44,7 +44,7 @@ const modal = new ModalView(ensureElement('#modal-container', PAGE) as HTMLEleme
 const linkForm = new LinkFormView(cloneTemplate(linkFormTemplate), events);
 const categoryOffersForm = new CategoryOffersFormView(cloneTemplate(categoryOffersFormTemplate), events);
 
-
+// Function
 function initPopularSection() {
   if (hitProducts.length === 0) {
     if (topProductSection) {
@@ -57,6 +57,7 @@ function initPopularSection() {
     fulfillViewer(0, popularItemsViewer, hitProducts);
   }
 }
+
 // Constants
 const topProductSection = ensureElement('.top-products', PAGE) as HTMLElement;
 const popularItemsViewer = cloneTemplate(topProductViewer);
@@ -66,9 +67,9 @@ const navigation = ensureElement('.header__navigation', PAGE);
 const contacts = ensureElement('.header__contacts', PAGE);
 const topProductContainer = ensureElement('.top-products__container', PAGE);
 const downloadCard = ensureElement('.requisites__button', PAGE);
-// Использование
+// Блокиратор скролла
 const scrollLock = new ScrollLock();
-
+// Создание массива популярных товаров с индексированием из общего файла данных
 const hitProducts = catalogData.reduce((acc: any[], category: ICategory) => {
   category.categoryOffers.forEach(offer => {
     const hitItems = offer.items.filter(item => item.hit === true);
@@ -185,7 +186,9 @@ const hitProducts = catalogData.reduce((acc: any[], category: ICategory) => {
 // })
 // observer.observe(catalog.getContainer())
 
-// Подписка на события 
+/*
+  Подписка на события 
+*/
 events.on(eventsList['catalogItems:changed'], () => {
   const productsHTMLArray = catalogModel.getCatalogItems().map(item => {
     return new CategoryCardView(cloneTemplate(cardTemplate), events).render(item)
@@ -260,21 +263,28 @@ if (navigation && contacts && burgerMenu && burgerMenuButton) {
   })
 }
 
-headerAnchorScrolling(PAGE, scrollLock);
 // Загрузка данных каталога
 catalogModel.setCatalogItems();
-// Инициализация сексии популярных товаров
+
+// Инициализация секции популярных товаров
 topProductContainer.prepend(popularItemsViewer);
 initPopularSection();
 addPaginations();
 
+// Реплейсер карты на 2 устройства
+mapReplacer();
+
+// Добавление события открытия формы на кнопки связи
 const openFormButtons = ensureAllElements('button[name="link-form"]', PAGE);
-// Так как нет модели предствления главной страницы, имитируем события кнопок тут
 openFormButtons.forEach(item => item.addEventListener('click', (e) => {
   e.preventDefault()
   events.emit(eventsList['linkForm:open'], { title: 'Свяжитесь с нами' });
 }))
 
-mapReplacer();
+// Добавление плавного скролла на кнопки шапки
+headerAnchorScrolling(PAGE, scrollLock);
 
+// Добавление загрузки карточки события
 downloadCard.addEventListener('click', () => downloadFile())
+
+

@@ -236,7 +236,7 @@ body:has(.modal.modal_active) {
 
 .modal__content {
   overflow-y: auto;
-  padding-inline-end: var(--between-gap);
+  padding-inline-end: calc(var(--main-padding) - var(--scroll-width)) ;
 }
 
 .modal__content.scroll-style::-webkit-scrollbar-track-piece {
@@ -433,8 +433,8 @@ body:has(.modal.modal_active) {
 }
 
 .scroll-style::-webkit-scrollbar {
-  width: 6px;
-  height: 6px;
+  width: var(--scroll-width);
+  height: var(--scroll-height);
 }
 
 .scroll-style::-webkit-scrollbar-thumb {
@@ -443,7 +443,8 @@ body:has(.modal.modal_active) {
 }
 
 .scroll-style::-webkit-scrollbar-track-piece {
-  background-image: linear-gradient(0deg, var(--bground-color-box-1lvl) 0%, var(--bground-color-box-1lvl) 40%, var(--bground-color-scroll-track) 45%, var(--bground-color-scroll-track) 55%, var(--bground-color-box-1lvl) 55%, var(--bground-color-box-1lvl) 100%);
+  /* background-image: linear-gradient(0deg, var(--bground-color-box-1lvl) 0%, var(--bground-color-box-1lvl) 40%, var(--bground-color-scroll-track) 45%, var(--bground-color-scroll-track) 55%, var(--bground-color-box-1lvl) 55%, var(--bground-color-box-1lvl) 100%); */
+  background-image: linear-gradient(transparent 0%, transparent 100%);
 }
 
 .scroll-style_mini::-webkit-scrollbar {
@@ -869,14 +870,18 @@ p {
 }
 
 /* ??-----------TOP PRODUCTS------------ */
-.top-products .scroll-style::-webkit-scrollbar-track-piece {
+/* .top-products .scroll-style::-webkit-scrollbar-track-piece {
   background-image: linear-gradient(90deg, var(--bground-color-box-1lvl) 0%, var(--bground-color-box-1lvl) 40%, var(--bground-color-scroll-track) 45%, var(--bground-color-scroll-track) 55%, var(--bground-color-box-1lvl) 55%, var(--bground-color-box-1lvl) 100%);
-}
+} */
 
 .top-products {
   display: flex;
   flex-direction: column;
   inline-size: 100%;
+}
+
+.top-products.block-style-1 {
+  padding-inline-end: 0;
 }
 
 .top-products__container {
@@ -979,7 +984,7 @@ p {
   gap: var(--between-gap);
   overflow-y: auto;
   padding: 2px;
-  padding-inline-end: 30px;
+  padding-inline-end: calc(var(--main-padding) - var(--scroll-width));
   scroll-snap-type: y mandatory;
   scroll-behavior: smooth;
   -webkit-overflow-scrolling: touch;

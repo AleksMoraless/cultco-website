@@ -34,7 +34,7 @@ export function headerAnchorScrolling(HTMLContainer: Element | null, scrollLock:
       }
       
       // Пересчитываем позицию после восстановления скролла
-      const topPosition = anchorElement.getBoundingClientRect().top + window.pageYOffset - (2 * padding) - header!;
+      const topPosition = anchorElement.getBoundingClientRect().top + window.pageYOffset - padding - header!;
       
       window.scrollTo({
         top: topPosition,
