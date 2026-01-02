@@ -33,7 +33,7 @@ export function headerAnchorScrolling(HTMLContainer: Element | null, scrollLock:
         return;
       }
       
-      anchorElement.scrollIntoView({
+      anchorElement.scrollIntoView( {
         behavior: 'smooth',
         block: 'start'
       });
