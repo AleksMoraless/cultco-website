@@ -23,9 +23,7 @@ import { mapReplacer } from './scripts/mapReplacer.ts';
 import { ScrollLock } from './components/base/noScroll.ts';
 import { downloadFile } from './scripts/downloadFile.ts';
 
-
-function initApp() {
-  const PAGE = document.body;
+const PAGE = document.body;
 // const BETWEEN_GAP = parseInt(window.getComputedStyle(PAGE).getPropertyValue('--between-gap'));
 // const BASE_URL = 'http://localhost:5173/';
 
@@ -285,9 +283,7 @@ openFormButtons.forEach(item => item.addEventListener('click', (e) => {
 
 // Добавление плавного скролла на кнопки шапки
 headerAnchorScrolling(PAGE, scrollLock);
-
 // Добавление загрузки карточки события
 downloadCard.addEventListener('click', () => downloadFile())
-} 
 
-document.addEventListener('DOMContentLoaded', initApp);
+
