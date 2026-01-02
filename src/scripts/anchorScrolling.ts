@@ -23,27 +23,24 @@ export function headerAnchorScrolling(HTMLContainer: Element | null, scrollLock:
   scrollLock.unlock();
   
   // Используем requestAnimationFrame для гарантии
-  requestAnimationFrame(() => {
-    requestAnimationFrame(() => {
-      if (anchorElement.id === 'main-anchor') {
-        window.scrollTo({
-          top: 0,
-          behavior: 'smooth'
-        });
-        return;
-      }
-      
-      // Пересчитываем позицию после восстановления скролла
-      const topPosition = anchorElement.getBoundingClientRect().top + window.pageYOffset - padding - header!;
-      alert(topPosition);
-      
+  // Даем время на восстановление DOM
+  setTimeout(() => {
+    if (anchorElement.id === 'main-anchor') {
       window.scrollTo({
-        top: topPosition,
+        top: 0,
         behavior: 'smooth'
       });
+      return;
+    }
+    
+    const topPosition = anchorElement.getBoundingClientRect().top + window.pageYOffset - padding - header!;
+    
+    window.scrollTo({
+      top: topPosition,
+      behavior: 'smooth'
     });
+  }, 150); // >100мс, так как в unlock есть 100мс задержка
   });
-});
 
   })
 })
